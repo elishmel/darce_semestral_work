@@ -12,7 +12,7 @@ Pro toto téma semestrální práce jsem se rozhodl v *(částečné)* návaznos
 
 ## Návrh systému
 
-Systém jsem se rozhodl navrhnout tak, že pokud ještě neexistuje nabídka na zboží, které se uživatel chystá nabízet, vytvoří zcela novou nabídku. Pokud ovšem již zboží, které se uživatel chystá nabídnout exituje, může u něho zakliknout tlačítko "Také nabízím" a přidá se do seznamu uživatelů, kteří danou položku nabízí. V případě poptávky po zboží tento proces funguje obdobně. Více uživatelů tedy může nabízet více zboží a stejně tak více zboží poptávat.
+Systém jsem se rozhodl navrhnout tak, že uživatelé mohou vytvořit nabídku na zboží, které nabízí. Stejně tak uživatelé mohou, pokud zrovna žádná nabídka tohoto typu neexistuje, o nějaké zboží požádat a jiní uživatelé jim pak v této žádosti mohou vyhovět. Platí pak vztah, že jeden uživatel může nabízet/poptávat více zboží.
 
 ## Komplexní dotaz
 
