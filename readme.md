@@ -14,6 +14,41 @@ Pro toto téma semestrální práce jsem se rozhodl v *(částečné)* návaznos
 
 Systém jsem se rozhodl navrhnout tak, že uživatelé mohou vytvořit nabídku na zboží, které nabízí. Stejně tak uživatelé mohou, pokud zrovna žádná nabídka tohoto typu neexistuje, o nějaké zboží požádat a jiní uživatelé jim pak v této žádosti mohou vyhovět. Platí pak vztah, že jeden uživatel může nabízet/poptávat více zboží.
 
+## Business operace
+
+**Operace přihlášení uživatele:**
+- Uživatel vyplní své udáje
+- Klikne na tlačítko "Přihlásit"
+- Systém se podívá, zda již uživatel s uživatelským jménem existuje **(R)**
+- Pokud uživatel neexistuje, systém oznámí neplatnost jména uživateli
+- Pokud uživatel existuje, systém ověří hash jeho hesla **(R)**
+- Pokud se heslo neshoduje, systém oznámí uživateli, že zadal nesprávného heslo
+- Pokud se heslo shoduje, uživatel je úspěšně přihlášen (možno třeba zanést do databáze časové razítko posledního přihlášení) **(U)**
+
+**Operace vytvoření nabídky**
+- Uživatel klikne na tlačítko "Nabídnout"
+- Systém mu zobrazí formulář pro vytvoření nabídky
+- Po vyplnění formuláře se systém podívá
+    - Zda je uživatel přihlášený **(R)**
+    - Pokud uživatel není přihlášený, systém ho vyzve k přihlášení
+    - Zda existují přiložené obrázky **(R)**
+    - Pokud přiložené obrázky neexistují, systém oznámí chybu
+    - Zda existují zvolené tagy **(R)**
+    - Pokud zvolené tagy neexistují, systém oznámí chybu
+- Projde li vše v pořádku, systém zavede nabídku do databáze se stavem isOffer=true (pokud by se jednalo o poptávu, isOffer by bylo nastaveno na false). **(C)**
+
+**Operace odstranění nabídky**
+- Uživatel klikne ve svém seznamu položek na položku, kterou si přeje spravovat 
+- Systém ověří, zda je uživatel přihlášený
+- Pokud není, systém ohlásí chybu
+- Pokud ano, systém ověří, zda nabídka skutečně patří aktuálně přihlášenému uživateli **(R)**
+- Pokud nepatří, systém ohlásí chybu
+- Pokud patří, systém se uživatele zeptá, zda si přeje nabídku trvale odstranit, či pouze "deaktivovat"
+- Pokud si uživatel přeje nabídku deaktivovat, systém nastaví stav isActive na false **(U)**
+- Pokud si uživatel přeje nabídku trvale smazat, systém odstraní záznam z databáze **(D)**
+
+
+
 ## Komplexní dotaz
 
 Komplexní dotaz nad databází bude mít podobu "Všechny nabídky od uživatele _____ s tagem _____" .
