@@ -1,5 +1,7 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
+import java.util.Objects;
+
 /**
  * Class representing the Tag object and table
  */
@@ -27,6 +29,6 @@ public class Tag implements DomainEntity<String>{
      * @param _value New Tag value
      */
     public void setValue(String _value){
-        value = _value;
+        value = Objects.requireNonNull(_value);
     }
 }

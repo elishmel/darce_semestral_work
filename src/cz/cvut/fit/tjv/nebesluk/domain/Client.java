@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Client implements DomainEntity<Long> {
     // Properties
@@ -32,7 +33,7 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setUsername(String _username){
-        username = _username;
+        username = Objects.requireNonNull(_username);
     }
 
     public String getPasswordHash(){
@@ -40,7 +41,7 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setPasswordHash(String _hash){
-        passwordHash = _hash;
+        passwordHash = Objects.requireNonNull(_hash);
     }
 
     public String getRealName(){
@@ -48,7 +49,7 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setRealName(String _realName){
-        realName = _realName;
+        realName = Objects.requireNonNull(_realName);
     }
 
     public LocalDateTime getDateCreated(){
@@ -56,7 +57,7 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setDateCreated(LocalDateTime _dateCreated){
-        dateCreated = _dateCreated;
+        dateCreated = Objects.requireNonNull(_dateCreated);
     }
 
     public LocalDateTime getDateLastLogon(){
@@ -64,7 +65,7 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setDateLastLogon(LocalDateTime _dateLastLogon){
-        dateLastLogon = _dateLastLogon;
+        dateLastLogon = Objects.requireNonNull(_dateLastLogon);
     }
 
     public Image getProfilePicture(){
@@ -72,6 +73,6 @@ public class Client implements DomainEntity<Long> {
     }
 
     public void setProfilePicture(Image _profilePicture){
-        profilePicture = _profilePicture;
+        profilePicture = Objects.requireNonNull(_profilePicture);
     }
 }

@@ -48,7 +48,7 @@ public class Image implements DomainEntity<Long>{
      * @param _url URL of the image
      */
     public void setUrl(URI _url){
-        url = _url;
+        url = Objects.requireNonNull(_url);
     }
 
     /**

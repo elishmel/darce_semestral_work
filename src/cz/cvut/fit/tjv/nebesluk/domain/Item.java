@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -70,7 +71,7 @@ public class Item implements DomainEntity<Long> {
      * @param _name New item name
      */
     public void setName(String _name){
-        name = _name;
+        name = Objects.requireNonNull(_name);
     }
 
     /**
@@ -86,7 +87,7 @@ public class Item implements DomainEntity<Long> {
      * @param _description New item description
      */
     public void setDescription(String _description){
-        description = _description;
+        description = Objects.requireNonNull(_description);
     }
 
     /**
@@ -127,7 +128,7 @@ public class Item implements DomainEntity<Long> {
      * @return True on success, false otherwise
      */
     public boolean addTag(Tag tag){
-        return tags.add(tag);
+        return tags.add(Objects.requireNonNull(tag));
     }
 
     /**
@@ -136,15 +137,15 @@ public class Item implements DomainEntity<Long> {
      * @return True on success, false otherwise
      */
     public boolean removeTag(Tag tag){
-        return tags.remove(tag);
+        return tags.remove(Objects.requireNonNull(tag));
     }
 
     public boolean addImage(Image image){
-        return images.add(image);
+        return images.add(Objects.requireNonNull(image));
     }
 
     public boolean removeImage(Image image){
-        return images.remove(image);
+        return images.remove(Objects.requireNonNull(image));
     }
 
     // - - - - - //
