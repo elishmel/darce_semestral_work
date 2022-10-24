@@ -1,6 +1,7 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
 import java.net.URI;
+import java.util.Objects;
 
 /**
  * Class representing the Image object and table
@@ -46,6 +47,7 @@ public class Image implements DomainEntity<Long>{
     /**
      * Set the image URL
      * @param _url URL of the image
+     * @throws NullPointerException if _url is null
      */
     public void setUrl(URI _url){
         url = Objects.requireNonNull(_url);

@@ -27,6 +27,7 @@ public class Tag implements DomainEntity<String>{
     /**
      * Set the Tag value
      * @param _value New Tag value
+     * @throws NullPointerException if _value is null
      */
     public void setValue(String _value){
         value = Objects.requireNonNull(_value);

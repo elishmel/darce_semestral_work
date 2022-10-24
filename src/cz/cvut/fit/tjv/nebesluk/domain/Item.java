@@ -69,6 +69,7 @@ public class Item implements DomainEntity<Long> {
     /**
      * Set new name for the item
      * @param _name New item name
+     * @throws NullPointerException if _name is null
      */
     public void setName(String _name){
         name = Objects.requireNonNull(_name);
@@ -85,6 +86,7 @@ public class Item implements DomainEntity<Long> {
     /**
      * Set new item description
      * @param _description New item description
+     * @throws NullPointerException if _description is null
      */
     public void setDescription(String _description){
         description = Objects.requireNonNull(_description);
@@ -126,6 +128,7 @@ public class Item implements DomainEntity<Long> {
      * Add tag
      * @param tag tag
      * @return True on success, false otherwise
+     * @throws NullPointerException if tag is null
      */
     public boolean addTag(Tag tag){
         return tags.add(Objects.requireNonNull(tag));
@@ -135,15 +138,28 @@ public class Item implements DomainEntity<Long> {
      * Remove tag
      * @param tag tag
      * @return True on success, false otherwise
+     * @throws NullPointerException if tag is null
      */
     public boolean removeTag(Tag tag){
         return tags.remove(Objects.requireNonNull(tag));
     }
 
+    /**
+     * Add image to this item
+     * @param image image
+     * @return True on success, false otherwise
+     * @throws NullPointerException if image is null
+     */
     public boolean addImage(Image image){
         return images.add(Objects.requireNonNull(image));
     }
 
+    /**
+     * Remove image from this item
+     * @param image image
+     * @return True on success, false otherwise
+     * @throws NullPointerException if image is null
+     */
     public boolean removeImage(Image image){
         return images.remove(Objects.requireNonNull(image));
     }
