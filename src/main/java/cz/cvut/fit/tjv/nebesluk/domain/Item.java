@@ -9,27 +9,12 @@ import java.util.Set;
  */
 public class Item implements DomainEntity<Long> {
     // Properties
-    /**
-     * ID of the item
-     */
     private Long item_id;
-    /**
-     * Name of the offer
-     */
     private String name;
-    /**
-     * Description of the item
-     */
     private String description;
-    /**
-     * Flag indicating if item is offer or request
-     */
     private boolean isOffer;
-    /**
-     * Flag indicating whether the Item is currently active
-     * eg. if it should be displayed to customers
-     */
     private boolean isActive;
+    private Client author;
 
     private Set<Tag> tags = new HashSet<>();
     private Set<Image> images = new HashSet<>();
@@ -40,6 +25,14 @@ public class Item implements DomainEntity<Long> {
     @Override
     public Long getId(){
         return item_id;
+    }
+
+    public Client getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Client author) {
+        this.author = author;
     }
 
     /**
@@ -122,6 +115,10 @@ public class Item implements DomainEntity<Long> {
      */
     public void setActive(boolean _isActive){
         isActive = _isActive;
+    }
+
+    public boolean hasTag(Tag tag){
+        return tags.contains(tag);
     }
 
     /**
