@@ -1,0 +1,13 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="dH2" transaction-type="RESOURCE_LOCAL">
+        <class>cz.cvut.fit.tjv.nebesluk.domain.Client</class>
+        <class>cz.cvut.fit.tjv.nebesluk.domain.Item</class>
+        <class>cz.cvut.fit.tjv.nebesluk.domain.Image</class>
+        <class>cz.cvut.fit.tjv.nebesluk.domain.Tag</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:semestral;DB_CLOSE_DELAY=-1"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
+</persistence>

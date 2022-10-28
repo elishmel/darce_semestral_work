@@ -1,5 +1,6 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -7,19 +8,36 @@ import java.util.Set;
 /**
  * Class representing offer/request item and table
  */
+@Entity
+@Table(name = "tbl_item")
 public class Item implements DomainEntity<Long> {
     // Properties
+    @Id
     private Long item_id;
     private String name;
     private String description;
     private boolean isOffer;
     private boolean isActive;
+    @ManyToOne
     private Client author;
-
+    @ManyToMany
     private Set<Tag> tags = new HashSet<>();
+    @OneToMany
     private Set<Image> images = new HashSet<>();
 
     // - - - - - //
+
+    public Item(){}
+
+    public Item(long _itemID, String _name, String _description,boolean _isOffer, boolean _isActive, Client _author){
+        item_id = _itemID;
+        name = _name;
+        description = _description;
+        isOffer = _isOffer;
+        isActive = _isActive;
+        author = _author;
+    }
+
     // Get;Set;
 
     @Override

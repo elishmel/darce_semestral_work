@@ -1,6 +1,8 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
-public interface DomainEntity<T> {
+import java.io.Serializable;
+
+public interface DomainEntity<T> extends Serializable {
 
     /**
      * Get primary key for this entity

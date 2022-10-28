@@ -1,25 +1,33 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.net.URI;
 import java.util.Objects;
 
 /**
  * Class representing the Image object and table
  */
+@Entity
+@Table(name = "tbl_image")
 public class Image implements DomainEntity<Long>{
     // Properties
 
-    /**
-     * Automatically generated id for image, is identifying
-     */
+    @Id
     private Long image_id;
 
-    /**
-     * URL pointing to the image
-     */
     private URI url;
 
     // - - - - - //
+    public Image(){
+
+    }
+
+    public Image(long _imageID, URI _uri){
+        image_id = _imageID;
+        url = _uri;
+    }
 
     // Get;Set;
 
