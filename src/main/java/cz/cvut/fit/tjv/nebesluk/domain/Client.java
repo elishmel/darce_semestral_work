@@ -1,40 +1,47 @@
 package cz.cvut.fit.tjv.nebesluk.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tbl_clients")
 public class Client implements DomainEntity<Long> {
     // Properties
-
-    /**
-     * Client ID - table primary key
-     */
+    @Id
     private Long client_id;
-    /**
-     * Username
-     */
+
     private String username;
-    /**
-     * Hashed password
-     */
+
     private String passwordHash;
-    /**
-     * Real name of the user
-     */
+
     private String realName;
-    /**
-     * Date & time on which was the user created
-     */
+
     private LocalDateTime dateCreated;
-    /**
-     * Date & time on which the user last logged in
-     */
+
     private LocalDateTime dateLastLogon;
-    /**
-     * Profile picture
-     */
+
+    @OneToOne
     private Image profilePicture;
     // - - - - - //
+
+    public Client(){
+
+    }
+
+    public Client(long _clientID,String _username, String _passwordHash, String _realName, LocalDateTime _dateCreate, LocalDateTime _dateLastLogon,Image _profilePicture){
+        client_id = _clientID;
+        username = _username;
+        passwordHash = _passwordHash;
+        realName = _realName;
+        dateCreated = (Objects.isNull(_dateCreate)) ? LocalDateTime.now() : _dateCreate;
+        dateLastLogon = _dateLastLogon;
+        profilePicture = _profilePicture;
+    }
+
     // Get;Set;
 
     @Override

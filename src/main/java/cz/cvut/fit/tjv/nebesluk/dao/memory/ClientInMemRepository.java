@@ -2,12 +2,14 @@ package cz.cvut.fit.tjv.nebesluk.dao.memory;
 
 import cz.cvut.fit.tjv.nebesluk.dao.repository.ClientRepository;
 import cz.cvut.fit.tjv.nebesluk.domain.Client;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAmount;
 import java.util.Collection;
 
+@Component
 public class ClientInMemRepository extends InMemoryRepository<Client,Long> implements ClientRepository{
     @Override
     public Collection<Client> findAllClientsRegisteredBefore(LocalDateTime date) {
