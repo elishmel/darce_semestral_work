@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.nebesluk.domain;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +9,7 @@ import java.util.Objects;
  * Class representing the Tag object and table
  */
 @Entity
-@Table(name = "tbl_tag")
+@Table
 public class Tag implements DomainEntity<String>{
     /**
      * ID and value of the Tag
@@ -45,5 +45,20 @@ public class Tag implements DomainEntity<String>{
      */
     public void setTag(String _value){
         tag = Objects.requireNonNull(_value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tag tag1 = (Tag) o;
+
+        return tag.equals(tag1.tag);
+    }
+
+    @Override
+    public int hashCode() {
+        return tag.hashCode();
     }
 }

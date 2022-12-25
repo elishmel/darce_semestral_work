@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.nebesluk.domain;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
 import java.io.Serializable;
 

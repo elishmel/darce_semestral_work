@@ -1,4 +1,6 @@
-package cz.cvut.fit.tjv.nebesluk.domain;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
+
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Image;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,7 +11,7 @@ import java.util.Set;
  * Class representing offer/request item and table
  */
 @Entity
-@Table(name = "tbl_item")
+@Table
 public class Item implements DomainEntity<Long> {
     // Properties
     @Id
@@ -180,4 +182,35 @@ public class Item implements DomainEntity<Long> {
     }
 
     // - - - - - //
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Item item = (Item) o;
+
+        if (isOffer != item.isOffer) return false;
+        if (isActive != item.isActive) return false;
+        if (!item_id.equals(item.item_id)) return false;
+        if (!name.equals(item.name)) return false;
+        if (!description.equals(item.description)) return false;
+        if (!author.equals(item.author)) return false;
+        if (!tags.equals(item.tags)) return false;
+        return images.equals(item.images);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = item_id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + (isOffer ? 1 : 0);
+        result = 31 * result + (isActive ? 1 : 0);
+        result = 31 * result + author.hashCode();
+        result = 31 * result + tags.hashCode();
+        result = 31 * result + images.hashCode();
+        return result;
+    }
 }

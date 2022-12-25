@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.nebesluk.domain;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_clients")
+@Table
 public class Client implements DomainEntity<Long> {
     // Properties
     @Id
@@ -166,4 +166,33 @@ public class Client implements DomainEntity<Long> {
     public void setProfilePicture(Image _profilePicture){
         profilePicture = Objects.requireNonNull(_profilePicture);
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null) return false;
+
+        Client c = (Client)o;
+
+        if(!Objects.equals(this.client_id,c.client_id)) return false;
+        if(!Objects.equals(this.username,c.username)) return false;
+        if(!Objects.equals(this.realName,c.realName)) return false;
+        if(!Objects.equals(this.passwordHash,c.passwordHash)) return false;
+        if(!Objects.equals(this.dateCreated,c.dateCreated)) return false;
+        if(!Objects.equals(this.dateLastLogon,c.dateLastLogon)) return false;
+        return Objects.equals(this.profilePicture, c.profilePicture);
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = client_id != null ? client_id.hashCode() : 0;
+        hash = 31 * hash + (username != null ? username.hashCode() : 0);
+        hash = 31 * hash + (passwordHash != null ? passwordHash.hashCode() : 0);
+        hash = 31 * hash + (realName != null ? realName.hashCode() : 0);
+        hash = 31 * hash + (dateCreated != null ? dateCreated.hashCode() : 0);
+        hash = 31 * hash + (dateLastLogon != null ? dateLastLogon.hashCode() : 0);
+        hash = 31 * hash + (profilePicture != null ? profilePicture.hashCode() : 0);
+        return hash;
+    }
+
 }

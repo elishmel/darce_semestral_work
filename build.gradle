@@ -1,27 +1,32 @@
 plugins {
-    id 'java'
+	id 'java'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.1.0'
 }
 
-group 'cz.cvut.fit.tjv.semestral.nebesluk'
-version '1.0-SNAPSHOT'
+group = 'cz.cvut.fit.nebesluk.semestral'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 repositories {
-    mavenCentral()
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
 }
-
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
 
 dependencies {
-    implementation 'org.springframework.data:spring-data-jpa:2.7.5'
-    implementation 'org.springframework:spring-context:5.3.21'
-    implementation 'org.hibernate:hibernate-core:5.6.12.Final'
-    implementation 'com.h2database:h2:2.1.214'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	runtimeOnly 'org.springdoc:springdoc-openapi-ui'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly 'com.h2database:h2'
 }
 
-test {
-    useJUnitPlatform()
+tasks.named('test') {
+	useJUnitPlatform()
 }

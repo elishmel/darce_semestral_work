@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.nebesluk.domain;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +10,7 @@ import java.util.Objects;
  * Class representing the Image object and table
  */
 @Entity
-@Table(name = "tbl_image")
+@Table
 public class Image implements DomainEntity<Long>{
     // Properties
 
@@ -70,4 +70,23 @@ public class Image implements DomainEntity<Long>{
     }
 
     // - - - - - //
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Image image = (Image) o;
+
+        if (!image_id.equals(image.image_id)) return false;
+        return url.equals(image.url);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = image_id.hashCode();
+        result = 31 * result + url.hashCode();
+        return result;
+    }
 }
