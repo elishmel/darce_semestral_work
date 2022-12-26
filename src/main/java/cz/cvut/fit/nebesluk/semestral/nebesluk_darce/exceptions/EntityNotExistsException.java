@@ -1,4 +1,4 @@
-package cz.cvut.fit.tjv.nebesluk.exceptions;
+package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions;
 
 public class EntityNotExistsException extends EntityStateException{
     public EntityNotExistsException(){
