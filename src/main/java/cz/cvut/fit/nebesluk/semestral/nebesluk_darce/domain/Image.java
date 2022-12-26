@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Class representing the Image object and table
  */
-@Entity
+@Entity(name = "Images")
 @Table
 public class Image implements DomainEntity<Long>{
     // Properties

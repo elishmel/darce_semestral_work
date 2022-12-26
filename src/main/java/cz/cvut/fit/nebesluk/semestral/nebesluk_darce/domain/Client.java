@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Clients")
 @Table
 public class Client implements DomainEntity<Long> {
     // Properties

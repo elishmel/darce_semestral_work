@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Class representing the Tag object and table
  */
-@Entity
+@Entity(name = "Tags")
 @Table
 public class Tag implements DomainEntity<String>{
     /**

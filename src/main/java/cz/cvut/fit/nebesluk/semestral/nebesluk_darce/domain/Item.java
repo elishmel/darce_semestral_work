@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Class representing offer/request item and table
  */
-@Entity
+@Entity(name = "Items")
 @Table
 public class Item implements DomainEntity<Long> {
     // Properties
