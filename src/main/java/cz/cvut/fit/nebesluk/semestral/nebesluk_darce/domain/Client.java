@@ -1,11 +1,11 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "Clients")
 @Table
@@ -23,6 +23,9 @@ public class Client implements DomainEntity<Long> {
     private LocalDateTime dateCreated;
 
     private LocalDateTime dateLastLogon;
+
+    @OneToMany
+    private Set<Item> received = new HashSet<>();
 
     @OneToOne
     private Image profilePicture;
@@ -43,6 +46,19 @@ public class Client implements DomainEntity<Long> {
     }
 
     // Get;Set;
+
+
+    public Set<Item> getReceived() {
+        return received;
+    }
+
+    public void addReceived(Item item) {
+        received.add(item);
+    }
+
+    public void removeReceived(Item item){
+        received.remove(item);
+    }
 
     @Override
     public Long getId(){
