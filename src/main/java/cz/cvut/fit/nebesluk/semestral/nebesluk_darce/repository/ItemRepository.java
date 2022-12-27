@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-@Primary
 public interface ItemRepository extends JpaRepository<Item,Long> {
 
     Collection<Item> findItemsByTagsContaining(Tag tag);
