@@ -1,6 +1,7 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Image;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,6 +28,10 @@ public class Item implements DomainEntity<Long> {
     @OneToMany
     private Set<Image> images = new HashSet<>();
 
+    @Nullable
+    @ManyToOne
+    private Client receiver;
+
     // - - - - - //
 
     public Item(){}
@@ -41,6 +46,16 @@ public class Item implements DomainEntity<Long> {
     }
 
     // Get;Set;
+
+
+    @Nullable
+    public Client getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(@Nullable Client receiver) {
+        this.receiver = receiver;
+    }
 
     @Override
     public Long getId(){
