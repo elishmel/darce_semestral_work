@@ -8,15 +8,11 @@ import java.util.Collection;
 import java.util.Date;
 
 public interface ClientRepository extends JpaRepository<Client,Long> {
-    @Query("SELECT client FROM Clients client where client.dateLastLogon < :date")
-    Collection<Client> GetAllLogedBefore(Date date);
+    Collection<Client> findClientsByDateLastLogonBefore(Date date);
 
-    @Query("SELECT client from Clients client where client.dateLastLogon > :date")
-    Collection<Client> GetAllLogedAfter(Date date);
+    Collection<Client> findClientsByDateLastLogonAfter(Date date);
 
-    @Query("select client from Clients client where client.dateCreated < :date")
-    Collection<Client> GetAllCreatedBefore(Date date);
+    Collection<Client> findClientsByDateCreatedBefore(Date date);
 
-    @Query("select client from Clients client where client.dateCreated > :date")
-    Collection<Client> GetAllCreatedAfter(Date date);
+    Collection<Client> findClientsByDateCreatedAfter(Date date);
 }

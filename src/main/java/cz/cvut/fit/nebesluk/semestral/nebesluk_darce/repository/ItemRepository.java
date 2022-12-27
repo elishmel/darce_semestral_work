@@ -14,24 +14,33 @@ import java.util.Collection;
 @Primary
 public interface ItemRepository extends JpaRepository<Item,Long> {
 
-    @Query("SELECT item FROM Items item WHERE item.item_id in (SELECT tag FROM Tags tag WHERE tag.tag = :tag)")
-    Collection<Item> GetAllByTag(Tag tag);
+    Collection<Item> findItemsByTagsContaining(Tag tag);
 
-    @Query("SELECT item FROM Items item WHERE item.isOffer = true")
-    Collection<Item> GetAllOffers();
+    /**
+     * Get all items that are offer
+     * @return
+     */
+    Collection<Item> findItemsByOfferIsTrue();
 
-    @Query("SELECT item FROM Items item WHERE item.isOffer = false")
-    Collection<Item> GetAllRequests();
+    /**
+     * Get all items that are requests
+     * @return
+     */
+    Collection<Item> getItemsByOfferIsFalse();
 
-    @Query("SELECT item FROM Items item WHERE item.isActive = true")
-    Collection<Item> GetAllActive();
+    /**
+     * Get all active items
+     * @return
+     */
+    Collection<Item> findItemsByActiveIsTrue();
 
-    @Query("SELECT item FROM Items item where item.isActive = false")
-    Collection<Item> GetAllInactive();
+    /**
+     * Get all inactive items
+     * @return
+     */
+    Collection<Item> findItemsByActiveIsFalse();
 
-    @Query("SELECT item from Items item where item.author = :author")
-    Collection<Item> GetAllFromAuthor(Client author);
+    Collection<Item> findItemsByAuthor(Client author);
 
-    @Query("SELECT item from Items item where item.name LIKE CONCAT('%',:term,'%')")
-    Collection<Item> GetAllItemsWithTermInName(String term);
+    Collection<Item> findItemsByNameContains(String term);
 }
