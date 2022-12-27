@@ -24,9 +24,6 @@ public class Client implements DomainEntity<Long> {
 
     private LocalDateTime dateLastLogon;
 
-    @OneToMany
-    private Set<Item> received = new HashSet<>();
-
     @OneToOne
     private Image profilePicture;
     // - - - - - //
@@ -46,19 +43,6 @@ public class Client implements DomainEntity<Long> {
     }
 
     // Get;Set;
-
-
-    public Set<Item> getReceived() {
-        return received;
-    }
-
-    public void addReceived(Item item) {
-        received.add(item);
-    }
-
-    public void removeReceived(Item item){
-        received.remove(item);
-    }
 
     @Override
     public Long getId(){
