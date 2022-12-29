@@ -25,7 +25,7 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
      * Get all items that are requests
      * @return
      */
-    Collection<Item> getItemsByOfferIsFalse();
+    Collection<Item> findItemsByOfferIsFalse();
 
     /**
      * Get all active items
