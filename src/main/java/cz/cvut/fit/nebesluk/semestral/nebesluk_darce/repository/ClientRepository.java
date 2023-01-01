@@ -9,14 +9,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client,Long> {
-    Collection<Client> findClientsByDateLastLogonBefore(Date date);
 
-    Collection<Client> findClientsByDateLastLogonAfter(Date date);
+    @Query("select max(client_id) from Clients")
+    public Optional<Long> getMaxId();
 
-    Collection<Client> findClientsByDateCreatedBefore(Date date);
+    public Collection<Client> findClientsByDateLastLogonBefore(Date date);
 
-    Collection<Client> findClientsByDateCreatedAfter(Date date);
+    public Collection<Client> findClientsByDateLastLogonAfter(Date date);
+
+    public Collection<Client> findClientsByDateCreatedBefore(Date date);
+
+    public Collection<Client> findClientsByDateCreatedAfter(Date date);
 }

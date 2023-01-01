@@ -1,5 +1,7 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -16,8 +18,6 @@ public class Client implements DomainEntity<Long> {
 
     private String username;
 
-    private String passwordHash;
-
     private String realName;
 
     private LocalDateTime dateCreated;
@@ -25,6 +25,7 @@ public class Client implements DomainEntity<Long> {
     private LocalDateTime dateLastLogon;
 
     @OneToOne
+    @Nullable
     private Image profilePicture;
     // - - - - - //
 
@@ -32,10 +33,9 @@ public class Client implements DomainEntity<Long> {
 
     }
 
-    public Client(long _clientID,String _username, String _passwordHash, String _realName, LocalDateTime _dateCreate, LocalDateTime _dateLastLogon,Image _profilePicture){
+    public Client(long _clientID,String _username, String _realName, LocalDateTime _dateCreate, LocalDateTime _dateLastLogon,Image _profilePicture){
         client_id = _clientID;
         username = _username;
-        passwordHash = _passwordHash;
         realName = _realName;
         dateCreated = (Objects.isNull(_dateCreate)) ? LocalDateTime.now() : _dateCreate;
         dateLastLogon = _dateLastLogon;
@@ -80,23 +80,6 @@ public class Client implements DomainEntity<Long> {
      */
     public void setUsername(String _username){
         username = Objects.requireNonNull(_username);
-    }
-
-    /**
-     * Get the passwordHash
-     * @return passwordHash
-     */
-    public String getPasswordHash(){
-        return passwordHash;
-    }
-
-    /**
-     * Set the password hash
-     * @param _hash hash
-     * @throws NullPointerException if _hash is null
-     */
-    public void setPasswordHash(String _hash){
-        passwordHash = Objects.requireNonNull(_hash);
     }
 
     /**
@@ -164,7 +147,7 @@ public class Client implements DomainEntity<Long> {
      * @throws NullPointerException if _profilePicture is null
      */
     public void setProfilePicture(Image _profilePicture){
-        profilePicture = Objects.requireNonNull(_profilePicture);
+        profilePicture = _profilePicture;
     }
 
     @Override
@@ -177,7 +160,6 @@ public class Client implements DomainEntity<Long> {
         if(!Objects.equals(this.client_id,c.client_id)) return false;
         if(!Objects.equals(this.username,c.username)) return false;
         if(!Objects.equals(this.realName,c.realName)) return false;
-        if(!Objects.equals(this.passwordHash,c.passwordHash)) return false;
         if(!Objects.equals(this.dateCreated,c.dateCreated)) return false;
         if(!Objects.equals(this.dateLastLogon,c.dateLastLogon)) return false;
         return Objects.equals(this.profilePicture, c.profilePicture);
@@ -187,7 +169,6 @@ public class Client implements DomainEntity<Long> {
     public int hashCode(){
         int hash = client_id != null ? client_id.hashCode() : 0;
         hash = 31 * hash + (username != null ? username.hashCode() : 0);
-        hash = 31 * hash + (passwordHash != null ? passwordHash.hashCode() : 0);
         hash = 31 * hash + (realName != null ? realName.hashCode() : 0);
         hash = 31 * hash + (dateCreated != null ? dateCreated.hashCode() : 0);
         hash = 31 * hash + (dateLastLogon != null ? dateLastLogon.hashCode() : 0);

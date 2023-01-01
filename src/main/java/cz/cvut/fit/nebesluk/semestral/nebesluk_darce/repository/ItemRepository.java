@@ -9,9 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
+
+    @Query("select max(item_id) from Items")
+    public Optional<Long> getMaxId();
 
     Collection<Item> findItemsByTagsContaining(Tag tag);
 

@@ -1,6 +1,5 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Image;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -19,8 +18,8 @@ public class Item implements DomainEntity<Long> {
     private Long item_id;
     private String name;
     private String description;
-    private boolean isOffer;
-    private boolean isActive;
+    private boolean offer;
+    private boolean active;
     @ManyToOne
     private Client author;
     @ManyToMany
@@ -40,8 +39,8 @@ public class Item implements DomainEntity<Long> {
         item_id = _itemID;
         name = _name;
         description = _description;
-        isOffer = _isOffer;
-        isActive = _isActive;
+        offer = _isOffer;
+        active = _isActive;
         author = _author;
     }
 
@@ -125,7 +124,7 @@ public class Item implements DomainEntity<Long> {
      * @return Bool - isOffer state of the item
      */
     public boolean getOffer(){
-        return isOffer;
+        return offer;
     }
 
     /**
@@ -133,7 +132,7 @@ public class Item implements DomainEntity<Long> {
      * @param _isOffer New isOffer state
      */
     public void setOffer(boolean _isOffer){
-        isOffer = _isOffer;
+        offer = _isOffer;
     }
 
     /**
@@ -141,7 +140,7 @@ public class Item implements DomainEntity<Long> {
      * @return Bool - the isActive flag
      */
     public boolean getActive(){
-        return isActive;
+        return active;
     }
 
     /**
@@ -149,7 +148,7 @@ public class Item implements DomainEntity<Long> {
      * @param _isActive New isActive value
      */
     public void setActive(boolean _isActive){
-        isActive = _isActive;
+        active = _isActive;
     }
 
     public boolean hasTag(Tag tag){
@@ -206,8 +205,8 @@ public class Item implements DomainEntity<Long> {
 
         Item item = (Item) o;
 
-        if (isOffer != item.isOffer) return false;
-        if (isActive != item.isActive) return false;
+        if (offer != item.offer) return false;
+        if (active != item.active) return false;
         if (!item_id.equals(item.item_id)) return false;
         if (!name.equals(item.name)) return false;
         if (!description.equals(item.description)) return false;
@@ -221,8 +220,8 @@ public class Item implements DomainEntity<Long> {
         int result = item_id.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + (isOffer ? 1 : 0);
-        result = 31 * result + (isActive ? 1 : 0);
+        result = 31 * result + (offer ? 1 : 0);
+        result = 31 * result + (active ? 1 : 0);
         result = 31 * result + author.hashCode();
         result = 31 * result + tags.hashCode();
         result = 31 * result + images.hashCode();

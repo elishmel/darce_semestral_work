@@ -5,6 +5,7 @@ import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Item;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Tag;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityStateException;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ClientRepository;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,12 @@ public class ItemService extends AbstractService<Item,Long>{
     public ItemService(ItemRepository repository,ClientService clientService_,TagService tagService){
         super(repository);
         clientService = clientService_;
+    }
+
+    @Override
+    public Item Create(Item entity) {
+        entity.setItem_id(((ItemRepository)repository).getMaxId().orElse((long)-1)+1);
+        return super.Create(entity);
     }
 
     public Item ReceiveItem(Long clientId,Long itemId){
@@ -37,14 +44,10 @@ public class ItemService extends AbstractService<Item,Long>{
         }
     }
 
-    public Item RequestItem(Long clientId, Item item){
-        Optional<Client> optionalClient = clientService.ReadById(clientId);
-
-        Client client = optionalClient.orElseThrow(EntityNotExistsException::new);
-        item.setReceiver(client);
+    public Item RequestItem(Item item){
+        item.setReceiver(item.getAuthor());
         item.setOffer(false);
         item.setActive(true);
-        item.setAuthor(client);
         try{
             return Create(item);
         } catch(EntityStateException e){
@@ -52,13 +55,9 @@ public class ItemService extends AbstractService<Item,Long>{
         }
     }
 
-    public Item OfferItem(Long clientId, Item item){
-        Optional<Client> optionalClient = clientService.ReadById(clientId);
-
-        Client client = optionalClient.orElseThrow(EntityNotExistsException::new);
+    public Item OfferItem(Item item){
         item.setActive(true);
         item.setOffer(true);
-        item.setAuthor(client);
         try {
             return Create(item);
         } catch (EntityStateException e){
@@ -72,14 +71,6 @@ public class ItemService extends AbstractService<Item,Long>{
         Client client = optionalClient.orElseThrow(EntityNotExistsException::new);
 
         return ((ItemRepository)repository).findItemsByAuthor(client);
-    }
-
-    public Collection<Item> GetAllWithTag(String tagId){
-        Optional<Tag> optionalTag = tagService.ReadById(tagId);
-
-        Tag tag = optionalTag.orElseThrow(EntityNotExistsException::new);
-
-        return ((ItemRepository)repository).findItemsByTagsContaining(tag);
     }
 
     public Collection<Item> GetAllWithTags(HashSet<String> tagIds){
@@ -106,7 +97,7 @@ public class ItemService extends AbstractService<Item,Long>{
         return ((ItemRepository)repository).findItemsByOfferIsTrue();
     }
 
-    public Collection<Item> GetAllRequessts(){
+    public Collection<Item> GetAllRequests(){
         return ((ItemRepository)repository).findItemsByOfferIsFalse();
     }
 
