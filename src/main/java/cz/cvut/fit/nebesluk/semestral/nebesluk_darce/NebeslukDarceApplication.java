@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +19,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -53,14 +56,18 @@ public class NebeslukDarceApplication {
 	}
 
 	@Bean
-	UserDetailsManager userDetailsManager(DataSource dataSource){
+	UserDetailsManager userDetailsManager(DataSource dataSource) throws Exception {
 		var conf = new JdbcUserDetailsManager(dataSource);
-		conf.createUser(
-				User.withUsername("admin").
-						password("{noop}1234").
-						roles("USER","ADMIN").
-						build()
-		);
+		try {
+			conf.createUser(
+					User.withUsername("admin").
+							password("{noop}1234").
+							roles("USER", "ADMIN").
+							build()
+			);
+		} catch (Exception e){
+
+		}
 		return conf;
 	}
 }

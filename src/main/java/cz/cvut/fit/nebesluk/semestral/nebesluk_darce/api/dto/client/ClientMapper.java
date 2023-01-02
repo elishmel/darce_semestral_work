@@ -44,7 +44,9 @@ public class ClientMapper {
 
     public ClientSmallDto toSmallDto(Client entity){
         var dto = new ClientSmallDto();
-
+        dto.setClient_id(entity.getClient_id());
+        dto.setUsername(entity.getUsername());
+        dto.setProfilePicture(entity.getProfilePicture() != null ? entity.getProfilePicture().getUrl() : null);
         return dto;
     }
 }
