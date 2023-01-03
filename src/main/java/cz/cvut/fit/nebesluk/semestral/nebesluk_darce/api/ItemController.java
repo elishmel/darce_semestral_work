@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/item")
 public class ItemController{
 
     private ItemService itemService;

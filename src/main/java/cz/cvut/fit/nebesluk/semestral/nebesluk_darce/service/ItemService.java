@@ -90,9 +90,12 @@ public class ItemService extends AbstractService<Item,Long>{
     }
 
     public Collection<Item> GetAllWithTermInName(String term){
-        return ((ItemRepository)repository).findItemsByNameContains(term);
+        return ((ItemRepository)repository).findItemsByNameContainsIgnoreCase(term);
     }
 
+    public Collection<Item> GetAll(){
+        return ((ItemRepository)repository).findAll();
+    }
     public Collection<Item> GetAllOffers(){
         return ((ItemRepository)repository).findItemsByOfferIsTrue();
     }

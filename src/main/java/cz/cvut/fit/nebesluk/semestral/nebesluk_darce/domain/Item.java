@@ -3,6 +3,7 @@ package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -193,6 +194,10 @@ public class Item implements DomainEntity<Long> {
      */
     public boolean removeImage(Image image){
         return images.remove(Objects.requireNonNull(image));
+    }
+
+    public Collection<Image> getImages(){
+        return images;
     }
 
     // - - - - - //

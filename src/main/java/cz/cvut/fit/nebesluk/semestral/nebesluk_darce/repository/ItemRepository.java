@@ -45,7 +45,7 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
 
     Collection<Item> findItemsByAuthor(Client author);
 
-    Collection<Item> findItemsByNameContains(String term);
+    Collection<Item> findItemsByNameContainsIgnoreCase(String term);
 
     Collection<Item> findItemsByReceiver(Client client);
 }
