@@ -5,12 +5,14 @@ import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsE
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ClientRepository;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,10 +39,14 @@ public class ImageService extends AbstractService<Image,Long>{
     }
 
     @Override
-    public void DeleteById(Long ID) throws IOException {
+    public void DeleteById(Long ID) {
         var v = GetById(ID).getUrl().replace("http://localhost:8080/","");
         Path path = Paths.get(this.getClass().getClassLoader().getResource("public/pictures").getPath()+v);
-        Files.delete(path);
+        try{
+            Files.delete(path);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         super.DeleteById(ID);
     }
 

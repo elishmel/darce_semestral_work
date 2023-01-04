@@ -43,7 +43,7 @@ public abstract class AbstractService<Entity extends DomainEntity<Key>,Key> {
         return repository.findById(ID);
     }
 
-    public void DeleteById(Key ID) throws IOException {
+    public void DeleteById(Key ID){
         if(repository.existsById(ID)){
             repository.deleteById(ID);
         }
