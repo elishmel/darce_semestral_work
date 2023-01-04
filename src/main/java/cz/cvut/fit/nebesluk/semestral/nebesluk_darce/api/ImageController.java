@@ -70,8 +70,6 @@ public class ImageController {
             imageService.DeleteById(id);
         } catch (EntityNotExistsException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }
