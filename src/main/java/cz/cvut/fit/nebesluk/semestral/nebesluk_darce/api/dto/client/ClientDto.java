@@ -18,7 +18,7 @@ public class ClientDto {
 
     private LocalDateTime dateLastLogon;
 
-    private Image profilePicture;
+    private Long profilePicture;
 
     public Long getClient_id() {
         return client_id;
@@ -60,11 +60,11 @@ public class ClientDto {
         this.dateLastLogon = dateLastLogon;
     }
 
-    public Image getProfilePicture() {
+    public Long getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(Long profilePicture) {
         this.profilePicture = profilePicture;
     }
 }

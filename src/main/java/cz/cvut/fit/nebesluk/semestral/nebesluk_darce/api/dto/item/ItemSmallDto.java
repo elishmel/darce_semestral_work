@@ -1,11 +1,17 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.item;
 
+import java.awt.*;
+
 public class ItemSmallDto {
     private Long itemId;
 
     private Long author;
 
     private String name;
+
+    private Long[] images;
+
+    private boolean offer;
 
     public Long getItemId() {
         return itemId;
@@ -29,5 +35,21 @@ public class ItemSmallDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isOffer() {
+        return offer;
+    }
+
+    public void setOffer(boolean offer) {
+        this.offer = offer;
+    }
+
+    public Long[] getImages() {
+        return images;
+    }
+
+    public void setImages(Long[] images) {
+        this.images = images;
     }
 }

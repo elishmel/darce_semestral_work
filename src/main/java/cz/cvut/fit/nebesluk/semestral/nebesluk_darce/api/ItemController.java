@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -108,7 +109,9 @@ public class ItemController{
     }
 
     @GetMapping("/tags")
-    public Collection<ItemSmallDto> GetAllWithTags(@RequestBody HashSet<String> tags){
-        return itemService.GetAllWithTags(tags).stream().map(mapper::toSmallDto).toList();
+    public Collection<ItemSmallDto> GetAllWithTags(@RequestBody String[] tags){
+        HashSet<String> values = new HashSet<>(Arrays.asList(tags));
+
+        return itemService.GetAllWithTags(values).stream().map(mapper::toSmallDto).toList();
     }
 }

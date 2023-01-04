@@ -8,7 +8,7 @@ public class ClientSmallDto {
 
     private String username;
 
-    private URI profilePicture;
+    private String profilePicture;
 
     public Long getClient_id() {
         return client_id;
@@ -26,11 +26,11 @@ public class ClientSmallDto {
         this.username = username;
     }
 
-    public URI getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(URI profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 }

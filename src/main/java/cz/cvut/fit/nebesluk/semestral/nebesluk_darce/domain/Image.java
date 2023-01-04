@@ -1,5 +1,7 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,14 +19,14 @@ public class Image implements DomainEntity<Long>{
     @Id
     private Long image_id;
 
-    private URI url;
+    private String url;
 
     // - - - - - //
     public Image(){
 
     }
 
-    public Image(long _imageID, URI _uri){
+    public Image(long _imageID, String _uri){
         image_id = _imageID;
         url = _uri;
     }
@@ -32,6 +34,7 @@ public class Image implements DomainEntity<Long>{
     // Get;Set;
 
     @Override
+    @JsonIgnore
     public Long getId(){
         return image_id;
     }
@@ -57,7 +60,7 @@ public class Image implements DomainEntity<Long>{
      * @param _url URL of the image
      * @throws NullPointerException if _url is null
      */
-    public void setUrl(URI _url){
+    public void setUrl(String _url){
         url = Objects.requireNonNull(_url);
     }
 
@@ -65,7 +68,7 @@ public class Image implements DomainEntity<Long>{
      * Get the image URL
      * @return URI - URL of the image
      */
-    public URI getUrl(){
+    public String getUrl(){
         return url;
     }
 

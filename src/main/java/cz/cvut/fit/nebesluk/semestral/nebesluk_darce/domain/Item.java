@@ -25,7 +25,7 @@ public class Item implements DomainEntity<Long> {
     private Client author;
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
-    @OneToMany
+    @ManyToMany
     private Set<Image> images = new HashSet<>();
 
     @Nullable

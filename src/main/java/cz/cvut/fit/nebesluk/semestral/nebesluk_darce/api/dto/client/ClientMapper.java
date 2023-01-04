@@ -20,7 +20,7 @@ public class ClientMapper {
         client.setRealName(dto.getRealName());
         client.setDateCreated(dto.getDateCreated());
         client.setDateLastLogon(dto.getDateLastLogon());
-        client.setProfilePicture(dto.getProfilePicture());
+        client.setProfilePicture(dto.getProfilePicture() != null ? imageService.GetById(dto.getProfilePicture()) : null);
         return client;
     }
 
@@ -38,7 +38,12 @@ public class ClientMapper {
 
     public ClientDto toDto(Client entity){
         var dto = new ClientDto();
-
+        dto.setClient_id(entity.getClient_id());
+        dto.setUsername(entity.getUsername());
+        dto.setDateCreated(entity.getDateCreated());
+        dto.setDateLastLogon(entity.getDateLastLogon());
+        dto.setRealName(entity.getRealName());
+        dto.setProfilePicture(entity.getProfilePicture() != null ? entity.getProfilePicture().getId() : null);
         return dto;
     }
 

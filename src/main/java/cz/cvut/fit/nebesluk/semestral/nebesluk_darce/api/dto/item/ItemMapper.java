@@ -28,11 +28,7 @@ public class ItemMapper {
         return entity;
     }
 
-    public Item toEntity(ItemSmallDto dto){
-        var entity = new Item();
-        entity.setItem_id(dto.getItemId());
-        return entity;
-    }
+
 
     public Item toEntity(NewItemDto dto){
         var entity = new Item();
@@ -49,6 +45,14 @@ public class ItemMapper {
         dto.setItemId(entity.getItem_id());
         dto.setAuthor(entity.getAuthor().getId());
         dto.setName(entity.getName());
+        dto.setOffer(entity.getOffer());
+        Long[] ids = new Long[entity.getImages().size()];
+        int iterator = 0;
+        for (var item :
+                entity.getImages()) {
+            ids[iterator++] = item.getImage_id();
+        }
+        dto.setImages(ids);
         return dto;
     }
 
