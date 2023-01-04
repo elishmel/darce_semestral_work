@@ -14,6 +14,8 @@ public class ItemDto {
 
     private boolean offer;
 
+    private boolean active;
+
     private Collection<String> tags;
 
     private Collection<Long> images;
@@ -73,5 +75,13 @@ public class ItemDto {
 
     public void setImages(Collection<Long> images) {
         this.images = images;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
