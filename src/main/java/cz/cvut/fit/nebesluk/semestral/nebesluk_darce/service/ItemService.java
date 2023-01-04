@@ -93,6 +93,10 @@ public class ItemService extends AbstractService<Item,Long>{
         return ((ItemRepository)repository).findItemsByNameContainsIgnoreCase(term);
     }
 
+    public Collection<Item> GetAllActive(){
+        return ((ItemRepository)repository).findItemsByActiveIsTrue();
+    }
+
     public Collection<Item> GetAll(){
         return ((ItemRepository)repository).findAll();
     }
