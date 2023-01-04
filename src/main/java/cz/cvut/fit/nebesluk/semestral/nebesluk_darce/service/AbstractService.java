@@ -6,6 +6,7 @@ import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsE
 import org.apache.tomcat.util.buf.UDecoder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public abstract class AbstractService<Entity extends DomainEntity<Key>,Key> {
         return repository.findById(ID);
     }
 
-    public void DeleteById(Key ID){
+    public void DeleteById(Key ID) throws IOException {
         if(repository.existsById(ID)){
             repository.deleteById(ID);
         }

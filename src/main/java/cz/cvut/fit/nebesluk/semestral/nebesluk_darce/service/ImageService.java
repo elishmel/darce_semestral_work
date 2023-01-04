@@ -14,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -32,6 +34,14 @@ public class ImageService extends AbstractService<Image,Long>{
     public Image Create(Image entity) {
         entity.setImage_id(((ImageRepository)repository).getMaxId().orElse((long)-1)+1);
         return super.Create(entity);
+    }
+
+    @Override
+    public void DeleteById(Long ID) throws IOException {
+        var v = GetById(ID).getUrl().replace("http://localhost:8080/","");
+        Path path = Paths.get(this.getClass().getClassLoader().getResource("public/pictures").getPath()+v);
+        Files.delete(path);
+        super.DeleteById(ID);
     }
 
     public Collection<Image> GetAll(){
