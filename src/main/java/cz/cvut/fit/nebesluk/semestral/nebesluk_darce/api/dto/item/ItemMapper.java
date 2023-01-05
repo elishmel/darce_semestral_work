@@ -35,8 +35,13 @@ public class ItemMapper {
         entity.setAuthor(clientService.ReadById(dto.getAuthorId()).orElseThrow(EntityNotExistsException::new));
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
-        dto.getTags().forEach(tag -> entity.addTag(tagService.ReadById(tag).orElseThrow(EntityNotExistsException::new)));
-        dto.getImages().forEach(image -> entity.addImage(imageService.ReadById(image).orElseThrow(EntityNotExistsException::new)));
+        if(dto.getTags() != null){
+            dto.getTags().forEach(
+                    tag -> entity.addTag(tagService.ReadById(tag).orElseThrow(EntityNotExistsException::new)));
+        }
+        if(dto.getImages() != null){
+            dto.getImages().forEach(image -> entity.addImage(imageService.ReadById(image).orElseThrow(EntityNotExistsException::new)));
+        }
         return entity;
     }
 
@@ -63,8 +68,8 @@ public class ItemMapper {
         dto.setDescription(entity.getDescription());
         dto.setName(entity.getName());
         dto.setOffer(entity.getOffer());
-        dto.setTags(tagService.ReadAll().stream().map(Tag::getTag).toList());
-        dto.setImages(imageService.ReadAll().stream().map(Image::getId).toList());
+        dto.setTags(entity.getTag().parallelStream().map(Tag::getTag).toList());
+        dto.setImages(entity.getImages().parallelStream().map(Image::getImage_id).toList());
         return dto;
     }
 

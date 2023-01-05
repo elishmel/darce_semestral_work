@@ -15,4 +15,6 @@ public interface ImageRepository extends JpaRepository<Image,Long> {
     @Query("select max(image_id) from Images")
     public Optional<Long> getMaxId();
 
+
+
 }

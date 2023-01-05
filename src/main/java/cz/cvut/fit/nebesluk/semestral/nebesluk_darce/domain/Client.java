@@ -16,6 +16,7 @@ public class Client implements DomainEntity<Long> {
     @Id
     private Long client_id;
 
+    @Column(unique = true)
     private String username;
 
     private String realName;
