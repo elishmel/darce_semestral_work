@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -46,6 +44,7 @@ public class ImageController {
 
     @PostMapping
     public Image ReceiveImage(@RequestParam MultipartFile image, @Value("${server.url}") String server) throws IOException {
+        // TODO: Belongs in ImageService
         String name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + image.hashCode();
         String extension = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
         String fileName = name+extension;
@@ -55,5 +54,20 @@ public class ImageController {
         Image i = new Image();
         i.setUrl(server+filePath);
         return imageService.Create(i);
+    }
+
+    @PutMapping("/{id}")
+    public Image Update(@PathVariable Long id,@Value("${server.url}") String server,@RequestParam MultipartFile image) throws IOException {
+        Delete(id);
+        return ReceiveImage(image,server);
+    }
+
+    @DeleteMapping("/{id}")
+    public void Delete(@PathVariable Long id){
+        try{
+            imageService.DeleteById(id);
+        } catch (EntityNotExistsException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }

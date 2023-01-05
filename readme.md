@@ -56,3 +56,11 @@ Komplexní dotaz nad databází bude mít podobu "Všechny nabídky od uživatel
 ----
 
 ***Disclaimer:** Projekt Dárce je pracovní název, není finální a v průběhu vývoje se očekávají změny.<br> Projekt Dárce není chráněný žádnou ochranou známkou. Schoda s libovolnou existující fyzickou či právní entitou je čistě náhodná.*
+
+
+---
+
+Ikona chybějícího obrázku pochází z:
+<a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Icon.doit - Flaticon</a>
+Logo webu bylo poskytnuto kamarádem grafikem:
+Simon Chaloupka @ https://instagram.com/simonhytte?igshid=YmMyMTA2M2Y=

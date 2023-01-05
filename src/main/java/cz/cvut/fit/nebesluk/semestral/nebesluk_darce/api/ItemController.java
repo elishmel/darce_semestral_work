@@ -98,6 +98,11 @@ public class ItemController{
         }
     }
 
+    @GetMapping("/active")
+    public Collection<ItemSmallDto> GetAllActive(){
+        return itemService.GetAllActive().stream().map(mapper::toSmallDto).toList();
+    }
+
     @GetMapping("/all/{term}")
     public Collection<ItemSmallDto> GetAllWithTerm(@PathVariable String term){
         return itemService.GetAllWithTermInName(term).stream().map(mapper::toSmallDto).toList();

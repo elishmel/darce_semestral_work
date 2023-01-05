@@ -176,6 +176,8 @@ public class Item implements DomainEntity<Long> {
         return tags.remove(Objects.requireNonNull(tag));
     }
 
+    public Collection<Tag> getTag(){return tags;}
+
     /**
      * Add image to this item
      * @param image image

@@ -1,7 +1,5 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client;
 
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.item.ItemDto;
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.item.ItemSmallDto;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service.ImageService;
 
@@ -32,7 +30,9 @@ public class ClientMapper {
 
     public Client toEntity(NewClientDto dto){
         var client = new Client();
-
+        client.setUsername(dto.getUsername());
+        client.setRealName(dto.getRealName());
+        client.setProfilePicture(imageService.GetById(dto.getImage()));
         return client;
     }
 

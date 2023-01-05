@@ -14,17 +14,6 @@ public class NebeslukDarceApplication {
 
 		var context = SpringApplication.run(NebeslukDarceApplication.class, args);
 
-		ClientService clientService = context.getBean(ClientService.class);
-
-		Client client = new Client();
-		client.setDateCreated(LocalDateTime.now());
-		client.setDateLastLogon(LocalDateTime.now());
-		client.setUsername("Test");
-		client.setProfilePicture(null);
-		client.setRealName("Test test");
-
-		clientService.Create(client);
-
 
 	}
 
@@ -35,19 +24,5 @@ public class NebeslukDarceApplication {
 		return httpSecurity.build();
 	}
 
-	@Bean
-	UserDetailsManager userDetailsManager(DataSource dataSource) throws Exception {
-		var conf = new JdbcUserDetailsManager(dataSource);
-		try {
-			conf.createUser(
-					User.withUsername("admin").
-							password("{noop}1234").
-							roles("USER", "ADMIN").
-							build()
-			);
-		} catch (Exception e){
-
-		}
-		return conf;
-	}*/
+*/
 }
