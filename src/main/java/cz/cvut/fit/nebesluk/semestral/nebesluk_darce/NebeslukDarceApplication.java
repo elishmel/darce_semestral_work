@@ -35,19 +35,5 @@ public class NebeslukDarceApplication {
 		return httpSecurity.build();
 	}
 
-	@Bean
-	UserDetailsManager userDetailsManager(DataSource dataSource) throws Exception {
-		var conf = new JdbcUserDetailsManager(dataSource);
-		try {
-			conf.createUser(
-					User.withUsername("admin").
-							password("{noop}1234").
-							roles("USER", "ADMIN").
-							build()
-			);
-		} catch (Exception e){
-
-		}
-		return conf;
-	}*/
+*/
 }

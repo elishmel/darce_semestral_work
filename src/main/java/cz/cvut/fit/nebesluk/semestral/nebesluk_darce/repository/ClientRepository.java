@@ -17,6 +17,8 @@ public interface ClientRepository extends JpaRepository<Client,Long> {
     @Query("select max(client_id) from Clients")
     public Optional<Long> getMaxId();
 
+    public Optional<Client> findClientByUsername(String username);
+
     public Collection<Client> findClientsByDateLastLogonBefore(Date date);
 
     public Collection<Client> findClientsByDateLastLogonAfter(Date date);

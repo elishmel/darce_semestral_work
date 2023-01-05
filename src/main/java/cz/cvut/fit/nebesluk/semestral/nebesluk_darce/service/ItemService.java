@@ -2,14 +2,11 @@ package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service;
 
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Item;
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Tag;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityStateException;
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ClientRepository;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Service

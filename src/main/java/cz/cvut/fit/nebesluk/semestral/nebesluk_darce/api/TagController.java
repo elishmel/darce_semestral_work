@@ -3,7 +3,6 @@ package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Tag;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityAlreadyExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
-import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityStateException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
