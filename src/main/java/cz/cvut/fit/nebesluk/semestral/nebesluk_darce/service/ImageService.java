@@ -21,7 +21,7 @@ public class ImageService extends AbstractService<Image,Long>{
 
     @Override
     public Image Create(Image entity) {
-        entity.setImage_id(((ImageRepository)repository).getMaxId().orElse((long)-1)+1);
+        entity.setImage_id((((ImageRepository)repository).getMaxId().orElse((long)-1)) + 1);
         return super.Create(entity);
     }
 
