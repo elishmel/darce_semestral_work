@@ -36,7 +36,7 @@ public class ImageController {
     @GetMapping("/{id}")
     public Image GetImageWithId(@PathVariable Long id){
         try {
-            return imageService.GetById(id);
+            return imageService.GetById(id).orElseThrow(EntityNotExistsException::new);
         } catch (EntityNotExistsException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
