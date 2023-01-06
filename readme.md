@@ -62,16 +62,34 @@ Komplexní dotaz nad databází bude mít podobu "Všechny nabídky od uživatel
 
 ## Popis odevzdané práce
 
-Projekt se, po vzoru práce ze semestru, skládá ze dvou čásí:
+Projekt se, po vzoru práce ze semestru, skládá ze dvou částí:
 - Backendu - Ten lze nalézt v aktuálním repozitáři
 - Frontendu - [Nachází se v tomto repozitáři](https://gitlab.fit.cvut.cz/nebesluk/tjv_semestral_client)
 
-Backend je nakonfigurovaný k použití s PostgreSQL databází v Dockeru, tu lze spustit příkazem `docker compose up`. Oba projekty jsou dále implementovány s využitím Gradle a lze je tedy spustit sekvencí příkazů `./gradle build` a `./gradle bootRun`. Dále lze spustit testy pomocí příkazu `./gradle test`.
+Backend je nakonfigurovaný k použití s PostgreSQL databází v Dockeru, tu lze spustit příkazem `docker compose up`. Ve zdrojích aplikace _(src/main/resources)_ lze najít ukázkový soubor s předvytvořenými daty. Jsou zde připraveni dva uživatelé, Lumir a Esmeralda s předpřiravenými nabídkami a požadavky. Oba tito uživatelé mají totožné heslo, a to "1234". Kvůli kompatabilitě s testy je ovšem potřeba SQL soubor znefunkčnit, má tedy umělou příponu _.old_.
 
-K implementaci frontendu je užito kombinace Jersey, Thymeleaf, BootStrap, SpringBoot a Spring Security.
+Oba projekty jsou dále implementovány s využitím Gradle a lze je tedy spustit sekvencí příkazů `./gradle build` a `./gradle bootRun`. Dále lze na backendu spustit testy pomocí příkazu `./gradle test`.
 
+K implementaci frontendu je užito kombinace Jersey, Thymeleaf, BootStrap, SpringBoot a Spring Security. V projektu je realizovaná autentikace uživatelů za pomocí Spring Security a HttpBasic hlaviček u vybraný REST požadavků.
+
+Ověření uživatele v klientské části probíhá REST požadavkem na server, který vrátí, zda je uživatel existující entita, či nikoli. Po úspěšném ověrění klientská aplikace vytvoří session s danými přihlašovacímí údaji, které jsou dále užity v ostatních REST požadavcích.
+
+Tagy _(počeštile značky)_ jsem se rozhodl implementovat _staticky_, tedy tak, že uživatelé nemohou přidávat značky vlastní, ale musí užít značky poskytnuté systémem. Standardní CRUD operace jsou pro ně však připraveny.
+
+V samotné aplikaci si uživatel bez přihlášení může:
+- Prohlížet nabídky
+- Vytvořit účet
+- Zobrazit veřejný profil libovolného uživatele
+
+Přihlášený uživatel pak dále může:
+- Vytvářet nabídky/poptávky
+- Přijímat/poskytovat _(tedy odpovídat)_ na existující nabídky/poptávky
+- Upravovat své položky
+- Upravovat svůj účet
+
+---
 
 Ikona chybějícího obrázku pochází z:
-<a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Icon.doit - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Icon.doit - Flaticon</a><br>
 Logo webu bylo poskytnuto kamarádem grafikem:
 Simon Chaloupka @ https://instagram.com/simonhytte?igshid=YmMyMTA2M2Y=

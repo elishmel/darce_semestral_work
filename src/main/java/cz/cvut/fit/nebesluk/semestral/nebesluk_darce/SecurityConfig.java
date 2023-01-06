@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/client/auth","/api/image")
+                .antMatchers(HttpMethod.POST,"/api/client/auth","/api/image","/api/item/*/request/*","/api/item/*/offer/*")
                 .permitAll()
                 .and()
                 .authorizeRequests()
