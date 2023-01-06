@@ -93,10 +93,8 @@ public class ItemService extends AbstractService<Item,Long>{
         var tags = tagIds.stream().
                 filter(s -> tagService.ReadById(s).isPresent()).
                 toList();
-        List<Item> result = Arrays.asList();
-        for (var t : tags) {
-            result.addAll(((ItemRepository)repository).findItemsByTagsContaining(tagService.ReadById(t).get()));
-        }
+        Collection<Item> result = new ArrayList<>();
+        tags.stream().forEach(t -> {result.addAll(((ItemRepository)repository).findItemsByTagsContaining(tagService.ReadById(t).orElseThrow(EntityNotExistsException::new)));});
 
         return result;
     }
