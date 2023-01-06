@@ -1,6 +1,7 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service;
 
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityAlreadyExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,11 @@ public class ClientService extends AbstractService<Client,Long> {
     }
 
     public Client Register(Client client, String password){
+
+        if(((ClientRepository)repository).findClientByUsername(client.getUsername()).isPresent()){
+            throw new EntityAlreadyExistsException(client);
+        }
+
         userDetailsManager.createUser(org.springframework.security.core.userdetails.User.
                 builder().
                 username(client.getUsername()).

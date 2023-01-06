@@ -23,10 +23,13 @@ public class ItemController{
 
     private ItemService itemService;
     private ClientService clientService;
+
+    private TagService tagService;
     private final ItemMapper mapper;
 
     public ItemController(ItemService itemService_, ClientService clientService_, ImageService imageService_, TagService tagService_){
         itemService = itemService_;
+        tagService = tagService_;
         clientService = clientService_;
         mapper = new ItemMapper(clientService_,tagService_,imageService_);
     }
@@ -138,5 +141,10 @@ public class ItemController{
         HashSet<String> values = new HashSet<>(Collections.singletonList(tag));
 
         return itemService.GetAllWithTags(values).stream().map(mapper::toSmallDto).toList();
+    }
+
+    @GetMapping("/tag/{tag}/author/{author}")
+    public Collection<ItemSmallDto> GetAllWithTagFromAuthor(@PathVariable String tag, @PathVariable Long author){
+        return itemService.GetAllWithTagFromAuthor(tagService.ReadById(tag).orElseThrow(EntityNotExistsException::new),clientService.ReadById(author).orElseThrow(EntityNotExistsException::new)).stream().map(mapper::toSmallDto).toList();
     }
 }

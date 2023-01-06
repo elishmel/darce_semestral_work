@@ -60,6 +60,17 @@ Komplexní dotaz nad databází bude mít podobu "Všechny nabídky od uživatel
 
 ---
 
+## Popis odevzdané práce
+
+Projekt se, po vzoru práce ze semestru, skládá ze dvou čásí:
+- Backendu - Ten lze nalézt v aktuálním repozitáři
+- Frontendu - [Nachází se v tomto repozitáři](https://gitlab.fit.cvut.cz/nebesluk/tjv_semestral_client)
+
+Backend je nakonfigurovaný k použití s PostgreSQL databází v Dockeru, tu lze spustit příkazem `docker compose up`. Oba projekty jsou dále implementovány s využitím Gradle a lze je tedy spustit sekvencí příkazů `./gradle build` a `./gradle bootRun`. Dále lze spustit testy pomocí příkazu `./gradle test`.
+
+K implementaci frontendu je užito kombinace Jersey, Thymeleaf, BootStrap, SpringBoot a Spring Security.
+
+
 Ikona chybějícího obrázku pochází z:
 <a href="https://www.flaticon.com/free-icons/no-photo" title="no photo icons">No photo icons created by Icon.doit - Flaticon</a>
 Logo webu bylo poskytnuto kamarádem grafikem:

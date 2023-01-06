@@ -2,6 +2,7 @@ package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service;
 
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Item;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Tag;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityStateException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.repository.ItemRepository;
@@ -87,6 +88,10 @@ public class ItemService extends AbstractService<Item,Long>{
         Client client = optionalClient.orElseThrow(EntityNotExistsException::new);
 
         return ((ItemRepository)repository).findItemsByAuthor(client);
+    }
+
+    public Collection<Item> GetAllWithTagFromAuthor(Tag tag, Client author){
+        return ((ItemRepository)repository).findItemsByTagsContainingAndAuthor(tag,author);
     }
 
     public Collection<Item> GetAllWithTags(HashSet<String> tagIds){

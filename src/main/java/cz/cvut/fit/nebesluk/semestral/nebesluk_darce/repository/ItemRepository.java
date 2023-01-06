@@ -25,6 +25,8 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
      */
     Collection<Item> findItemsByOfferIsTrue();
 
+    Collection<Item> findItemsByTagsContainingAndAuthor(Tag tag, Client client);
+
     /**
      * Get all items that are requests
      * @return
