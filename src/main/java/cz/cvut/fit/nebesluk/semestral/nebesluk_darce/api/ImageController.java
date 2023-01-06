@@ -4,6 +4,7 @@ import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Image;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service.ImageService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

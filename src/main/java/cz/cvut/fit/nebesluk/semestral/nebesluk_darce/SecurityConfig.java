@@ -65,6 +65,11 @@ public class SecurityConfig {
                             roles("USER", "ADMIN").
                             build()
             );
+            conf.createUser(
+                    User.withUsername("Esmeralda").
+                    password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("1234")).
+                            roles("USER").build()
+            );
         } catch (Exception e){
 
         }

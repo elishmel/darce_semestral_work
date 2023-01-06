@@ -1,8 +1,10 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Item implements DomainEntity<Long> {
     @Id
     private Long item_id;
     private String name;
+    @Column(length = 800)
     private String description;
     private boolean offer;
     private boolean active;
