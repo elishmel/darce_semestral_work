@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 
 @RestController
@@ -77,24 +78,43 @@ public class ItemController{
     }
 
     @PutMapping("/{id}")
-    public ItemDto Update(Long id, NewItemDto entity) {
+    public ItemDto Update(@PathVariable Long id, @RequestBody NewItemDto entity) {
         try{
             Item e = mapper.toEntity(entity);
+            e.setActive(true);
             e.setItem_id(id);
             return mapper.toDto(itemService.Update(e));
-        } catch (EntityAlreadyExistsException e){
-            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        } catch (EntityNotExistsException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (NullPointerException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
-    public void Delete(Long id) {
+    public void Delete(@PathVariable Long id) {
         try{
             itemService.DeleteById(id);
         } catch (EntityNotExistsException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{itemId}/request/{receiverId}")
+    public void Receive(@PathVariable Long itemId, @PathVariable Long receiverId){
+        try{
+            itemService.ReceiveItem(receiverId,itemId);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("{itemId}/offer/{providerId}")
+    public void Provide(@PathVariable Long itemId, @PathVariable Long providerId){
+        try{
+            itemService.ProvideItem(providerId,itemId);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -113,9 +133,9 @@ public class ItemController{
         return itemService.GetAllFromAuthor(authorId).stream().map(mapper::toSmallDto).toList();
     }
 
-    @GetMapping("/tags")
-    public Collection<ItemSmallDto> GetAllWithTags(@RequestBody String[] tags){
-        HashSet<String> values = new HashSet<>(Arrays.asList(tags));
+    @GetMapping("/tag/{tag}")
+    public Collection<ItemSmallDto> GetAllWithTags(@PathVariable String tag){
+        HashSet<String> values = new HashSet<>(Collections.singletonList(tag));
 
         return itemService.GetAllWithTags(values).stream().map(mapper::toSmallDto).toList();
     }

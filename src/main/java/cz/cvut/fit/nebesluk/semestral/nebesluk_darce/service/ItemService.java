@@ -13,9 +13,10 @@ import java.util.*;
 public class ItemService extends AbstractService<Item,Long>{
     ClientService clientService;
     TagService tagService;
-    public ItemService(ItemRepository repository,ClientService clientService_,TagService tagService){
+    public ItemService(ItemRepository repository,ClientService clientService_,TagService tagService_){
         super(repository);
         clientService = clientService_;
+        tagService = tagService_;
     }
 
     @Override
@@ -32,6 +33,24 @@ public class ItemService extends AbstractService<Item,Long>{
         Item item = optionalItem.orElseThrow(EntityNotExistsException::new);
 
         item.setReceiver(client);
+        item.setActive(false);
+
+        try{
+            return Update(item);
+        } catch (EntityStateException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Item ProvideItem(Long clientId,Long itemId){
+        Optional<Client> optionalClient = clientService.ReadById(clientId);
+        Optional<Item> optionalItem = this.ReadById(itemId);
+
+        Client client = optionalClient.orElseThrow(EntityNotExistsException::new);
+        Item item = optionalItem.orElseThrow(EntityNotExistsException::new);
+
+        item.setReceiver(item.getAuthor());
+        item.setAuthor(client);
         item.setActive(false);
 
         try{
@@ -79,11 +98,7 @@ public class ItemService extends AbstractService<Item,Long>{
             result.addAll(((ItemRepository)repository).findItemsByTagsContaining(tagService.ReadById(t).get()));
         }
 
-        if(!result.isEmpty()){
-            return result;
-        }
-
-        throw new EntityNotExistsException("No valid tags");
+        return result;
     }
 
     public Collection<Item> GetAllWithTermInName(String term){

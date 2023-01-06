@@ -45,9 +45,11 @@ public abstract class AbstractService<Entity extends DomainEntity<Key>,Key> {
 
     public void DeleteById(Key ID){
         if(repository.existsById(ID)){
+
             repository.deleteById(ID);
+        } else {
+            throw new EntityNotExistsException("No entity with ID " + ID);
         }
-        throw new EntityNotExistsException("No entity with ID " + ID);
     }
 
 }

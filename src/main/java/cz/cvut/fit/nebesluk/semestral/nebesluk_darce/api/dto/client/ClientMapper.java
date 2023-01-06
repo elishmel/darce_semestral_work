@@ -1,6 +1,8 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client;
 
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Image;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service.ImageService;
 
 public class ClientMapper {
@@ -18,7 +20,7 @@ public class ClientMapper {
         client.setRealName(dto.getRealName());
         client.setDateCreated(dto.getDateCreated());
         client.setDateLastLogon(dto.getDateLastLogon());
-        client.setProfilePicture(dto.getProfilePicture() != null ? imageService.GetById(dto.getProfilePicture()) : null);
+        client.setProfilePicture(dto.getProfilePicture() != null ? imageService.GetById(dto.getProfilePicture()).get() : null);
         return client;
     }
 
@@ -32,7 +34,7 @@ public class ClientMapper {
         var client = new Client();
         client.setUsername(dto.getUsername());
         client.setRealName(dto.getRealName());
-        client.setProfilePicture(imageService.GetById(dto.getImage()));
+        client.setProfilePicture( dto.getImage()!=null ? imageService.GetById(dto.getImage()).orElse(null) : null);
         return client;
     }
 

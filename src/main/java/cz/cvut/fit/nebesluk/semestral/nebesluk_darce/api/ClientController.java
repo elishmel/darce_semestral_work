@@ -4,6 +4,7 @@ import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client.ClientDto;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client.ClientMapper;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client.ClientSmallDto;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.api.dto.client.NewClientDto;
+import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain.Client;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityAlreadyExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.exceptions.EntityNotExistsException;
 import cz.cvut.fit.nebesluk.semestral.nebesluk_darce.service.ClientService;
@@ -18,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @RestController
@@ -83,6 +85,35 @@ public class ClientController {
         }
 
         return true;
+    }
+
+    @PutMapping("/{id}")
+    public ClientDto Update(@PathVariable Long id,@RequestBody NewClientDto dto){
+        try{
+            var oldUser = clientService.ReadById(id);
+            Client c = mapper.toEntity(dto);
+            c.setClient_id(id);
+            c.setDateCreated(oldUser.get().getDateCreated());
+            c.setDateLastLogon(LocalDateTime.now());
+
+            clientService.UpdateCredentials(oldUser.get().getUsername(),dto.getUsername(), dto.getPassword());
+
+            return mapper.toDto(clientService.Update(c));
+        } catch (EntityNotExistsException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (NullPointerException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void Delete(@PathVariable Long id){
+        try{
+            clientService.DeleteCredentials(id);
+            clientService.DeleteById(id);
+        }catch (EntityNotExistsException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

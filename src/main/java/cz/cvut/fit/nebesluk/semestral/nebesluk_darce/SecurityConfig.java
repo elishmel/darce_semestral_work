@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -34,8 +35,8 @@ public class SecurityConfig {
         var conf = new JdbcUserDetailsManager(dataSource);
         try {
             conf.createUser(
-                    User.withUsername("admin").
-                            password("{noop}1234").
+                    User.withUsername("Lumir").
+                            password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("1234")).
                             roles("USER", "ADMIN").
                             build()
             );

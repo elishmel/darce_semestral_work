@@ -1,5 +1,7 @@
 package cz.cvut.fit.nebesluk.semestral.nebesluk_darce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -26,6 +28,7 @@ public class Tag implements DomainEntity<String>{
     }
 
     @Override
+    @JsonIgnore
     public String getId(){
         return tag;
     }

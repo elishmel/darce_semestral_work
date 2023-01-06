@@ -28,8 +28,6 @@ public class ItemMapper {
         return entity;
     }
 
-
-
     public Item toEntity(NewItemDto dto){
         var entity = new Item();
         entity.setAuthor(clientService.ReadById(dto.getAuthorId()).orElseThrow(EntityNotExistsException::new));
@@ -51,6 +49,7 @@ public class ItemMapper {
         dto.setAuthor(entity.getAuthor().getId());
         dto.setName(entity.getName());
         dto.setOffer(entity.getOffer());
+        dto.setActive(entity.getActive());
         Long[] ids = new Long[entity.getImages().size()];
         int iterator = 0;
         for (var item :
@@ -66,6 +65,7 @@ public class ItemMapper {
         dto.setItemId(entity.getItem_id());
         dto.setAuthorId(entity.getAuthor().getId());
         dto.setDescription(entity.getDescription());
+        dto.setActive(entity.getActive());
         dto.setName(entity.getName());
         dto.setOffer(entity.getOffer());
         dto.setTags(entity.getTag().parallelStream().map(Tag::getTag).toList());
