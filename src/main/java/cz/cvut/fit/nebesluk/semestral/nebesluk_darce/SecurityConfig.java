@@ -2,12 +2,14 @@ package cz.cvut.fit.nebesluk.semestral.nebesluk_darce;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -26,7 +28,30 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/").permitAll();
+        httpSecurity
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/api/client/auth","/api/image")
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.PUT,"/api/*")
+                .authenticated().and().httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/api/*")
+                .authenticated().and()
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.DELETE,"/api/*")
+                .authenticated().and()
+                .httpBasic()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/").permitAll();
         return httpSecurity.build();
     }
 
